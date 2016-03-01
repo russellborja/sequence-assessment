@@ -6,17 +6,20 @@
 </head>
 
 <body ng-app="sequence">
-	<div>
-		
-	</div>
     <div class="container">
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators" ng-repeat="x in jsonObject.products">
                 <carousel-indicator num={{x.id - 1}}></carousel-indicator>
             </ol>
             <!-- Wrapper for slides -->
-            <div class="carousel-inner" role="listbox" ng-repeat="x in jsonObject.products">
-                <carousel-item num={{x.id -1}} imageurl={{x.images[0]['main-view']}} name={{x.name}} description={{x.description}}></carousel-item>
+            <div class="carousel-inner" role="listbox">
+                <div class="item" ng-class="{active: $first}" ng-repeat="x in jsonObject.products" id="{{x.id}}">
+                    <img ng-src="http://seq-front-end-assessment.s3-website-us-west-2.amazonaws.com/assets{{x.images[0]['main-view']}}" alt="">
+                    <div class="carousel-caption">
+                        <h3>{{x.name}}</h3>
+                        <p>{{x.description}}</p>
+                    </div>
+                </div>
             </div>
             <!-- Left and right controls -->
             <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
@@ -32,7 +35,24 @@
     <!-- Trigger the modal with a button -->
     <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" onclick="viewDetails()">Open Modal</button>
     
-    
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Some text in the modal.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="js/jquery-2.2.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
